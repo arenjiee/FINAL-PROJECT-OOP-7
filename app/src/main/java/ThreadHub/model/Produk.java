@@ -1,4 +1,4 @@
-package ThreadHub.model;
+package app.model;
 
 public class Produk {
     private int id;
@@ -7,12 +7,13 @@ public class Produk {
     private String kategori;
     private double harga;
     private int stok;
-    private String ukuran;   // S, M, L, XL, XXL
+    private String ukuran; 
     private String warna;
-    private String gender;   // Atribut baru untuk gender (PRIA, WANITA, ANAK-ANAK)
+    private String gender;   
+    private String imagePath;
 
     public Produk(int id, String nama, String deskripsi, String kategori,
-                  double harga, int stok, String ukuran, String warna, String gender) {
+                  double harga, int stok, String ukuran, String warna, String gender, String imagePath) {
         this.id        = id;
         this.nama      = nama;
         this.deskripsi = deskripsi;
@@ -21,7 +22,8 @@ public class Produk {
         this.stok      = stok;
         this.ukuran    = ukuran;
         this.warna     = warna;
-        this.gender    = gender; // Inisialisasi gender
+        this.gender    = gender; 
+        this.imagePath = imagePath;
     }
 
     // Getters
@@ -33,7 +35,8 @@ public class Produk {
     public int    getStok()      { return stok; }
     public String getUkuran()    { return ukuran; }
     public String getWarna()     { return warna; }
-    public String getGender()    { return gender; } // Getter baru
+    public String getGender()    { return gender; } 
+    public String getImagePath() { return imagePath; } // Getter foto
 
     // Setters
     public void setNama(String nama)           { this.nama = nama; }
@@ -43,7 +46,8 @@ public class Produk {
     public void setStok(int stok)              { this.stok = stok; }
     public void setUkuran(String ukuran)       { this.ukuran = ukuran; }
     public void setWarna(String warna)         { this.warna = warna; }
-    public void setGender(String gender)       { this.gender = gender; } // Setter baru
+    public void setGender(String gender)       { this.gender = gender; } 
+    public void setImagePath(String imagePath) { this.imagePath = imagePath; }
 
     public boolean isAvailable() {
         return stok > 0;
