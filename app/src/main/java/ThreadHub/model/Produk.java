@@ -1,16 +1,21 @@
 package ThreadHub.model;
 
-public class Produk {
+import java.io.Serializable;
+
+public class Produk implements Serializable {
+    
+    private static final long serialVersionUID = 1L; // ID Versi penyimpanan
+    
     private int id;
     private String nama;
     private String deskripsi;
     private String kategori;
     private double harga;
     private int stok;
-    private String ukuran; 
+    private String ukuran;   // S, M, L, XL, XXL
     private String warna;
-    private String gender;   
-    private String imagePath;
+    private String gender;   // Atribut gender (PRIA, WANITA, ANAK-ANAK)
+    private String imagePath; // URL/Path file foto produk
 
     public Produk(int id, String nama, String deskripsi, String kategori,
                   double harga, int stok, String ukuran, String warna, String gender, String imagePath) {
@@ -22,7 +27,7 @@ public class Produk {
         this.stok      = stok;
         this.ukuran    = ukuran;
         this.warna     = warna;
-        this.gender    = gender; 
+        this.gender    = gender;
         this.imagePath = imagePath;
     }
 
@@ -35,8 +40,8 @@ public class Produk {
     public int    getStok()      { return stok; }
     public String getUkuran()    { return ukuran; }
     public String getWarna()     { return warna; }
-    public String getGender()    { return gender; } 
-    public String getImagePath() { return imagePath; } // Getter foto
+    public String getGender()    { return gender; }
+    public String getImagePath() { return imagePath; }
 
     // Setters
     public void setNama(String nama)           { this.nama = nama; }
@@ -46,7 +51,7 @@ public class Produk {
     public void setStok(int stok)              { this.stok = stok; }
     public void setUkuran(String ukuran)       { this.ukuran = ukuran; }
     public void setWarna(String warna)         { this.warna = warna; }
-    public void setGender(String gender)       { this.gender = gender; } 
+    public void setGender(String gender)       { this.gender = gender; }
     public void setImagePath(String imagePath) { this.imagePath = imagePath; }
 
     public boolean isAvailable() {

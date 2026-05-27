@@ -1,6 +1,8 @@
 package ThreadHub.model;
 
-public class ItemKeranjang {
+import java.io.Serializable;
+
+public class ItemKeranjang implements Serializable {
     private Produk produk;
     private int    jumlah;
 

@@ -1,11 +1,13 @@
 package ThreadHub.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class Transaksi {
-    private static int idCounter = 1;
+public class Transaksi implements Serializable {
+    // Tambahkan serialVersionUID agar Java tidak bingung saat membaca file
+    private static final long serialVersionUID = 1L;
 
     private int               id;
     private Buyer             buyer;
@@ -14,8 +16,9 @@ public class Transaksi {
     private LocalDateTime     waktu;
     private String            status;   // "BERHASIL", "DIBATALKAN"
 
-    public Transaksi(Buyer buyer, List<ItemKeranjang> items) {
-        this.id         = idCounter++;
+    // Constructor sekarang meminta ID dari luar
+    public Transaksi(int id, Buyer buyer, List<ItemKeranjang> items) {
+        this.id         = id;
         this.buyer      = buyer;
         this.items      = List.copyOf(items);
         this.waktu      = LocalDateTime.now();
@@ -25,12 +28,12 @@ public class Transaksi {
                                .sum();
     }
 
-    public int                  getId()         { return id; }
-    public Buyer                getBuyer()      { return buyer; }
+    public int                getId()         { return id; }
+    public Buyer              getBuyer()      { return buyer; }
     public List<ItemKeranjang>  getItems()      { return items; }
-    public double               getTotalHarga() { return totalHarga; }
-    public LocalDateTime        getWaktu()      { return waktu; }
-    public String               getStatus()     { return status; }
+    public double             getTotalHarga() { return totalHarga; }
+    public LocalDateTime      getWaktu()      { return waktu; }
+    public String             getStatus()     { return status; }
 
     public String getTotalFormatted() {
         return String.format("Rp %,.0f", totalHarga);
