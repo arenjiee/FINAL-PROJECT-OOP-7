@@ -1,4 +1,4 @@
-package app.model;
+package ThreadHub.model;
 
 public class Produk {
     private int id;
