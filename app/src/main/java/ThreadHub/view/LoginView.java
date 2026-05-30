@@ -95,11 +95,26 @@ public class LoginView {
     loginBtn.setStyle(loginBtn.getStyle() + "-fx-font-size: 15px; -fx-padding: 12 0;");
     loginBtn.setOnAction(e -> handleLogin(usernameField.getText().trim(), passwordField.getText()));
 
-    inputContainer.getChildren().addAll(
-      usernameLabel, usernameField,
+    HBox registerBox = new HBox(5);
+    registerBox.setAlignment(Pos.CENTER);
+
+    Label lblBawah = new Label("Belum punya akun?");
+    lblBawah.setTextFill(Color.web(StyleKit.TEXT_MUTED));
+    lblBawah.setFont(Font.font(StyleKit.FONT_FAMILY, 13));
+
+    Hyperlink linkDaftar = new Hyperlink("Daftar di sini");
+    linkDaftar.setTextFill(Color.web(StyleKit.ACCENT));
+    linkDaftar.setFont(Font.font(StyleKit.FONT_FAMILY, FontWeight.BOLD, 13));
+    linkDaftar.setBorder(Border.EMPTY);
+    linkDaftar.setOnAction(e -> showRegisterDialog());
+
+    registerBox.getChildren().addAll(lblBawah, linkDaftar);
+    VBox.setMargin(registerBox, new Insets(5, 0, 0, 0));
+
+    inputContainer.getChildren().addAll(usernameLabel, usernameField,
       passwordLabel, passwordField,
       errorLabel,
-      loginBtn
+      loginBtn, registerBox
     );
 
     formPanel.getChildren().addAll(welcomeLabel, subLabel, inputContainer);
