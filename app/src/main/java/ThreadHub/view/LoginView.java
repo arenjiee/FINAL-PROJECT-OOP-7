@@ -57,7 +57,7 @@ public class LoginView {
     Label usernameLabel = new Label("Username");
     usernameLabel.setTextFill(Color.web(StyleKit.TEXT_MUTED));
     usernameLabel.setFont(Font.font(StyleKit.FONT_FAMILY, 13));
-    
+
     TextField usernameField = new TextField();
     usernameField.setPromptText("Masukkan username");
     styleTextField(usernameField);
@@ -172,12 +172,12 @@ public class LoginView {
       String password = pfPassword.getText().trim();
 
       if (nama.isEmpty() || username.isEmpty() || password.isEmpty()) {
-        errLabel.setText("Semua kolom wajib diisi.");
+        errLabel.setText("Semua kolom wajib diisi");
         return;
       }
 
       if (username.contains(" ")) {
-        errLabel.setText("Username tidak boleh mengandung spasi.");
+        errLabel.setText("Username tidak boleh mengandung spasi");
         return;
       }
 
@@ -187,7 +187,7 @@ public class LoginView {
           .anyMatch(u -> u.getUsername().equalsIgnoreCase(username));
 
       if (sudahAda) {
-        errLabel.setText("Username sudah terpakai, pilih yang lain.");
+        errLabel.setText("Username sudah terpakai, pilih yang lain");
         return;
       }
 
@@ -198,7 +198,7 @@ public class LoginView {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Pendaftaran Berhasil");
       alert.setHeaderText(null);
-      alert.setContentText("Akun berhasil dibuat! Silakan login menggunakan username dan password Anda.");
+      alert.setContentText("Akun berhasil dibuat! Silakan login menggunakan username dan password Anda");
       alert.showAndWait();
 
       dialog.close();
@@ -240,12 +240,29 @@ public class LoginView {
       "-fx-font-size: 14px;";
 
     tf.setStyle(baseStyle + "-fx-border-color: " + StyleKit.BORDER + ";");
+
+    tf.focusedProperty().addListener((obs, oldVal, isFocused) -> {
+      if (isFocused) {
+        tf.setStyle(baseStyle + "-fx-border-color: " + StyleKit.ACCENT + ";");
+      } else {
+        tf.setStyle(baseStyle + "-fx-border-color: " + StyleKit.BORDER + ";");
+      }
+    });
   }
 
   public void show() {
     stage.setTitle("ThreadHub — Login");
-    stage.setScene(new Scene(buildLayout(), 840, 560));
+
+    HBox layout = buildLayout();
+
+    if (stage.getScene() != null) {
+      stage.getScene().setRoot(layout);
+    } else {
+      stage.setScene(new Scene(layout, 840, 560));
+    }
+
     stage.setResizable(true);
+    stage.setMaximized(true);
     stage.show();
   }
 }
