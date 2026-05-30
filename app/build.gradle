@@ -32,7 +32,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'ThreadHub.Launcher'
+    mainClass = 'ThreadHub.Main'
 }
 
 javafx{
