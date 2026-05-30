@@ -156,5 +156,90 @@ public class DataStore {
         return produkList.stream().mapToInt(Produk::getId).max().orElse(0) + 1;
     }
 
+    //Transaksi
+    
+    @SuppressWarnings("unchecked")
+    private void muatDataTransaksi() {
+        File file = new File(FILE_TRANSAKSI);
+        if (file.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                List<Transaksi> dataTersimpan = (List<Transaksi>) ois.readObject();
+                transaksiList.addAll(dataTersimpan);
+            } catch (Exception e) {
+                System.out.println("Gagal memuat data transaksi.");
+            }
+        }
+    }
 
+    public void simpanDataTransaksi() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_TRANSAKSI))) {
+            oos.writeObject(transaksiList);
+        } catch (Exception e) {
+            System.out.println("Gagal menyimpan data transaksi: " + e.getMessage());
+        }
+    }
+
+    public void tambahTransaksi(Transaksi t) {
+        transaksiList.add(t);
+        simpanDataTransaksi(); 
+    }
+
+    public int generateTransaksiId() {
+        return transaksiList.stream().mapToInt(Transaksi::getId).max().orElse(0) + 1;
+    }
+
+    public List<Transaksi> getTransaksiBuyer(Buyer buyer) {
+        return transaksiList.stream()
+                .filter(t -> t.getBuyer().getId() == buyer.getId())
+                .toList();
+    }
+
+    public List<Transaksi> getAllTransaksi() { return transaksiList; }
+
+    //Fitur Outfit Bundle
+    
+    @SuppressWarnings("unchecked")
+    private void muatDataOutfit() {
+        File file = new File(FILE_OUTFIT);
+        if (file.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                List<OutfitBundle> dataTersimpan = (List<OutfitBundle>) ois.readObject();
+                outfitList.addAll(dataTersimpan);
+            } catch (Exception e) {
+                initSampleOutfit();
+            }
+        } else {
+            initSampleOutfit();
+        }
+    }
+
+    public void simpanDataOutfit() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_OUTFIT))) {
+            oos.writeObject(outfitList);
+        } catch (Exception e) {
+            System.out.println("Gagal menyimpan data outfit: " + e.getMessage());
+        }
+    }
+
+    private void initSampleOutfit() {
+        OutfitBundle streetwear = new OutfitBundle(1, "Streetwear Starter Pack", "STREETWEAR", "Kombinasi kasual jalanan yang modis.", null);
+        streetwear.tambahProdukKePaket(getProdukById(1)); 
+        streetwear.tambahProdukKePaket(getProdukById(2)); 
+
+        OutfitBundle casualWoman = new OutfitBundle(2, "Summer Casual Chic", "CASUAL", "Gaya santai nan elegan untuk wanita.", null);
+        casualWoman.tambahProdukKePaket(getProdukById(3)); 
+        casualWoman.tambahProdukKePaket(getProdukById(7)); 
+
+        outfitList.add(streetwear);
+        outfitList.add(casualWoman);
+        simpanDataOutfit();
+    }
+
+    public List<OutfitBundle> getAllOutfit() { return outfitList; }
+
+    public List<OutfitBundle> getOutfitByStyle(String style) {
+        return outfitList.stream()
+                .filter(o -> o.getKategoriStyle().equalsIgnoreCase(style))
+                .toList();
+    }
 }
