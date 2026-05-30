@@ -31,7 +31,6 @@ public class Produk implements Serializable {
         this.imagePath = imagePath;
     }
 
-    // Getters
     public int    getId()        { return id; }
     public String getNama()      { return nama; }
     public String getDeskripsi() { return deskripsi; }
@@ -43,7 +42,6 @@ public class Produk implements Serializable {
     public String getGender()    { return gender; }
     public String getImagePath() { return imagePath; }
 
-    // Setters
     public void setNama(String nama)           { this.nama = nama; }
     public void setDeskripsi(String deskripsi) { this.deskripsi = deskripsi; }
     public void setKategori(String kategori)   { this.kategori = kategori; }
@@ -59,7 +57,7 @@ public class Produk implements Serializable {
     }
 
     public String getHargaFormatted() {
-        return String.format("Rp %,.0f", harga);
+        return String.format("Rp %..0f", harga);
     }
 
     @Override

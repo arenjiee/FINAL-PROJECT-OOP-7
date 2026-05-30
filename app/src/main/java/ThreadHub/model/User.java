@@ -7,7 +7,7 @@ public abstract class User implements Serializable {
     private String username;
     private String password;
     private String nama;
-    private String role;   // "admin" atau "buyer"
+    private String role;
 
     public User(int id, String username, String password, String nama, String role) {
         this.id       = id;

@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Transaksi implements Serializable {
-    // Tambahkan serialVersionUID agar Java tidak bingung saat membaca file
     private static final long serialVersionUID = 1L;
 
     private int               id;
@@ -14,9 +13,8 @@ public class Transaksi implements Serializable {
     private List<ItemKeranjang> items;
     private double            totalHarga;
     private LocalDateTime     waktu;
-    private String            status;   // "BERHASIL", "DIBATALKAN"
+    private String            status;
 
-    // Constructor sekarang meminta ID dari luar
     public Transaksi(int id, Buyer buyer, List<ItemKeranjang> items) {
         this.id         = id;
         this.buyer      = buyer;
