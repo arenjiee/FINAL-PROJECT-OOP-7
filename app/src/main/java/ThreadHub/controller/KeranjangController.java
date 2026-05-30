@@ -48,7 +48,7 @@ public class KeranjangController {
     }
 
     public String getTotalFormatted() {
-        return String.format("Rp %..0f", getTotal());
+        return String.format("Rp %,.0f", getTotal());
     }
 
     public Transaksi checkout() {

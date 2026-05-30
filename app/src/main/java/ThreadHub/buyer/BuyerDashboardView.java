@@ -67,7 +67,6 @@ public class BuyerDashboardView {
         Region spacerLeft = new Region();
         HBox.setHgrow(spacerLeft, Priority.ALWAYS);
 
-        // Search Bar
         searchBar = new TextField();
         searchBar.setPromptText("Cari produk atau kategori... (Tekan Enter)");
         searchBar.setPrefWidth(450);
@@ -103,12 +102,10 @@ public class BuyerDashboardView {
         userActions.getChildren().addAll(greeting, btnRiwayat, cartIconContainer, btnLogout);
         topRow.getChildren().addAll(logo, spacerLeft, searchBar, spacerRight, userActions);
 
-        // 2. Baris Bawah (Kategori Menu Navigasi)
         HBox categoryRow = new HBox(35);
         categoryRow.setAlignment(Pos.CENTER);
         categoryRow.setPadding(new Insets(0, 0, 15, 0));
 
-        // PENAMBAHAN MENU OUTFIT DI SINI
         String[] categories = {"PAKAIAN", "WANITA", "PRIA", "ANAK-ANAK", "✨ INSPIRASI OUTFIT"};
         for (String cat : categories) {
             Label catLabel = new Label(cat);
@@ -174,8 +171,6 @@ public class BuyerDashboardView {
         return btn;
     }
 
-    // ── Navigation helpers ────────────────────────────────────────────────────
-
     public void showProdukView() {
         showProdukView("SEMUA", "");
     }
@@ -200,7 +195,6 @@ public class BuyerDashboardView {
         root.setCenter(new ProdukDetailView(this, p, keranjang).build());
     }
 
-    // FUNGSI UNTUK MENAMPILKAN HALAMAN OUTFIT
     public void showOutfitView() {
         root.setCenter(new OutfitView(this, keranjang).build());
     }

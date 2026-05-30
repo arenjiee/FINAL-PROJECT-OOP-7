@@ -23,7 +23,7 @@ public class DataStore {
         muatDataUser();      
         muatDataProduk(); 
         muatDataTransaksi(); 
-        muatDataOutfit();
+        muatDataOutfit(); // TAMBAHAN
     }
 
     public static DataStore getInstance() {
@@ -33,7 +33,7 @@ public class DataStore {
         return instance;
     }
 
-    //User
+    // ─── User ────────────────────────────────────────────────────────────────
 
     @SuppressWarnings("unchecked")
     private void muatDataUser() {
@@ -54,8 +54,8 @@ public class DataStore {
 
     private void initUsers() {
         users.add(new Admin(1, "admin", "admin123", "Administrator"));
-        users.add(new Buyer(2, "aren",  "arenjiee123",  "Arenjiee"));
-        users.add(new Buyer(3, "rifat",  "rifat123",  "patkasmang"));
+        // users.add(new Buyer(2, "aren",  "arenjiee123",  "Arenjiee"));
+        // users.add(new Buyer(3, "rifat",  "rifat123",  "patkasmang"));
     }
 
     public User login(String username, String password) {
@@ -83,13 +83,20 @@ public class DataStore {
     public void hapusUser(int id) {
         users.removeIf(u -> u.getId() == id);
         simpanDataUser();
+    
+        boolean isTransaksiDihapus = transaksiList.removeIf(t -> t.getBuyer().getId() == id);
+        
+        if (isTransaksiDihapus) {
+            simpanDataTransaksi();
+        }
     }
 
     public int generateUserId() {
         return users.stream().mapToInt(User::getId).max().orElse(0) + 1;
     }
 
-    //Produk
+    // ─── Produk ──────────────────────────────────────────────────────────────
+
     @SuppressWarnings("unchecked")
     private void muatDataProduk() {
         File file = new File(FILE_PRODUK);
@@ -156,7 +163,7 @@ public class DataStore {
         return produkList.stream().mapToInt(Produk::getId).max().orElse(0) + 1;
     }
 
-    //Transaksi
+    // ─── Transaksi ───────────────────────────────────────────────────────────
     
     @SuppressWarnings("unchecked")
     private void muatDataTransaksi() {
